@@ -22,8 +22,8 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 <h2>High-Level Deployment and Configuration Steps</h2>
 
-- Setup Domain Controller in Azure
-- Setup Client-1 in Azure
+- Setup Domain Controller and Client in Azure
+- Setup 
 - Step 3
 - Step 4
 
