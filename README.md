@@ -23,7 +23,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 <h2>High-Level Deployment and Configuration Steps</h2>
 
 - Setup Domain Controller and Client in Azure
-- Setup 
+- Install Active Directory
 - Step 3
 - Step 4
 
@@ -64,7 +64,14 @@ Create another VM with the Windows 10 image and name it Client-1, Make sure it i
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1092" height="767" alt="Screenshot 2025-08-07 164215" src="https://github.com/user-attachments/assets/44341ea2-24e8-4c47-9e5b-27d6adc019d9" />
+
 </p>
 <p>
-Create another VM with the Windows 10 image and name it Client-1, Make sure it is on the same region and Virtual Network as DC-1. Once you have made the VM, set its DNS settings to DC-1s Private IP address.
+Installing Active Directory: Log into DC 1 and install "Active Directory Domain Services" (open Windows Start menu, open "Server Manager" -> Add roles and features -> navigate to "Server Roles" and mark the box called "Active directory Domain Services", Contnue pressing next through the rest of the tabs, and then install.
+
+<p>
+  <img width="1542" height="690" alt="image" src="https://github.com/user-attachments/assets/fa9d2b37-2277-48e2-9e95-87a3995fc0e6" />
+
+</p>
+Next, Click on the flag on the top right of the server manager, and click "Promote this server to a domain controller", Select "Add a new forest", set the name as "mydomain.com", and set your password on the next page. After you set the password, you can navigate through the wizard without changing anything else, once you get to the prerequisites check, you can select install.
