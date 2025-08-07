@@ -44,7 +44,11 @@ In Microsoft Azure, Create a Resource group, A Virtual Network and subnet. Insid
 
 <p>
   <img width="1436" height="744" alt="Screenshot 2025-08-07 124336" src="https://github.com/user-attachments/assets/3763ac03-56e8-4d0f-9fcf-c0ec9ae9b6f2" />
-  After you've created the VM, set its NIC Private address to be static. (go to DC-1 -> Network settings -> Click on the Network interface -> Click on ipconfig1 at the bottom of the page -> set Allocation to "Static". Next, Log into the DC-1 VM and open windows firewall (right click start menu -> select "Run" -> type in "wf.msc") in the firewall, select "Windows Defender Firewall Properties" and turn off the firewall state for Domain, Private, and Public proflie.
+  After you've created the VM, set its NIC Private address to be static. (go to DC-1 -> Network settings -> Click on the Network interface -> Click on ipconfig1 at the bottom of the page -> set Allocation to "Static".
+ <p>
+   <img width="785" height="640" alt="Screenshot 2025-08-07 133250" src="https://github.com/user-attachments/assets/b04b82ba-5dd9-40f6-bf42-4e96df3d75cb" />
+
+  Next, Log into the DC-1 VM and open windows firewall (right click start menu -> select "Run" -> type in "wf.msc") in the firewall, select "Windows Defender Firewall Properties" and turn off the firewall state for Domain, Private, and Public proflie.
 </p>
 <br />
 
@@ -53,7 +57,7 @@ In Microsoft Azure, Create a Resource group, A Virtual Network and subnet. Insid
 
 </p>
 <p>
-Create another VM with the Windows 10 image and name it Client-1, Make sure it is on the same region and Virtual Network as DC-1. Once you have made the VM, set its DNS settings to DC-1s Private IP address. (copy DC-1 private ip address in microsoft azure, go to client-1 VM -> Netowrking Settiings -> Network interface -> DNS servers -> select custom, then paste th Private IP address). Next, restart the Client-1 VM from Azure Portal, then log into Client-1 and run the ping command with DC-1's Private IP Adress.
+Create another VM with the Windows 10 image and name it Client-1, Make sure it is on the same region and Virtual Network as DC-1. Once you have made the VM, set its DNS settings to DC-1s Private IP address. (copy DC-1 private ip address in microsoft azure, go to client-1 VM -> Netowrking Settiings -> Network interface -> DNS servers -> select custom, then paste th Private IP address). Once that is completed, restart the Client-1 VM from Azure Portal, then log into Client-1, open Powershell, and run the ping command with DC-1's Private IP Adress.
 
 
 </p>
