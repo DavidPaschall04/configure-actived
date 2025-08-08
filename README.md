@@ -27,7 +27,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 - Create a Domain Admin user within the domain
 - Setup Remote Desktop for non-administrative users
 - Creating additional users
-
+- Setup Account Lockout Policy & observe lockout data
 <h2>Deployment and Configuration Steps</h2>
 
 <p>
@@ -128,3 +128,23 @@ Creating additional users: Log back into DC-1 as "jane_admin" and open Windows P
 
 </p>
 <br />
+<p>
+<img width="1109" height="745" alt="Screenshot 2025-08-08 163549" src="https://github.com/user-attachments/assets/f60c0f40-2df8-4637-8171-d5c3b89baa49" />
+
+
+</p>
+<p>
+Account lockouts: In DC-1, right click the windows start menu and select "Run", run gpmc.msc, which takes you to the group policy management console. in the GPM, select "Default Domain Policy" under mydomain.com. In the GPM editor, Navigate to Computr Configuration -> Policies -> Windows Settings -> Security Settings -> Account Policies -> Account Lockout Policy. You can use the Three primary lockout settings to change, how long an account is locked, How many numbers of failed logins before its locked, and The amount of time after the failed logon attempts counter is reset to 0. After youve set your lock out settings, close the GPM editor, and log into client-1 as "mydomain.com\jane_admin", Open command prompt and run the command "gpupdate /force" (This will automatically enforce the account lockout policy, which would take 90 minutes by default). You can log out of client-1 and test the system by repeatedly failing logins.  
+</p>
+<br />
+<p>
+<img width="567" height="611" alt="Screenshot 2025-08-08 165338" src="https://github.com/user-attachments/assets/480cbf22-cf88-4254-8054-d0155b3a04eb" />
+
+</p>
+<p>
+Observing logs: In DC-1, search and open "eventvwr.msc", In the Event Viewer, select "Windows Logs" and right click "Security", select the option "Find" and search for the employee account you have been using. By clicking "Find Next" you can see the Activity of your employee account, such as logon attempts and when you have logged out. Normally, this wont show the failed logon attempts, to see that data, Reopen Event viewer as Administrator, and log in with "mydomain.com\jane_admin", navigate back to the Security option and search for the employee account again, as admin, it should now show all Audit Failures.
+</p>
+<br />
+<p>
+  This is the end of this brief tutorial on Active Directory setup and A few of its On-premises Implementations that you will see in this field.
+</p>
