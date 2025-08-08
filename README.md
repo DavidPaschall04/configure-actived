@@ -25,7 +25,8 @@ This tutorial outlines the implementation of on-premises Active Directory within
 - Setup Domain Controller and Client in Azure
 - Install Active Directory
 - Create a Domain Admin user within the domain
-- Step 4
+- Setup Remote Desktop for non-administrative users
+- Creating additional users
 
 <h2>Deployment and Configuration Steps</h2>
 
@@ -95,6 +96,35 @@ Once logged back into DC-1, open "active directory users and computers" in the w
 </p>
 <p>
 Log in to your Windows 10 VM (client-1), open Settings -> About -> on the right side, Click "Rename this PC" -> under the Computer Name tab, Click Change -> Select member of "Domain" and type in "mydomain.com" and select OK, Set the username to "mydomain.com\jane_admin" and use the same password previously used (Cyberlab123!). Once completed, you will have to restart the VM, after the VM closes, log back into DC-1 VM and go into ADUC -> mydomain.com -> Computers, and make sure client-1 is inside the folder. Inside ADUC, right click mydomain.com and create a new OU, name it "_CLIENTS", go into the computers folder and drag clent-1 into the new folder.
+
+</p>
+<br />
+<p>
+<img width="1095" height="691" alt="Screenshot 2025-08-08 144501" src="https://github.com/user-attachments/assets/b8b0dcb8-12bc-4c73-a889-bae553a653d1" />
+
+
+</p>
+<p>
+To set up Remote Desktop for no-administrative users, log into your client-1 VM as "mydomain.com\jane_admin", right click the windows menu button and go to "System" -> Remote Desktop -> "Select users that can remotely access this PC" -> Add "Domain users" access to remote desktop (This step is normally done with "Group Policy", which allows access to changing many systems at once)
+
+</p>
+<br />
+
+<p>
+<img width="1662" height="976" alt="Screenshot 2025-08-08 150745" src="https://github.com/user-attachments/assets/95992a0c-ce5c-4044-83c7-82e19a4eff03" />
+
+
+</p>
+<p>
+Creating additional users: Log back into DC-1 as "jane_admin" and open Windows PowerShell ISE as an administrator (for the sake of this Tutorial, a script will be used to create users https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1) Open the script line on powershell and copy and paste the script in to it, use CTRL + S to save the file with the script. 
+  <p>
+    <img width="1128" height="626" alt="Screenshot 2025-08-08 150227" src="https://github.com/user-attachments/assets/93a2862c-2688-4c55-9b98-9036dcb4e4ef" />
+
+  </p>
+  
+  Make sure to change the path of the script to "_EMPLOYEES". After making sure The path is located to _EMPLOYEES, Run the script and it will start creating new burner accounts to act as employees (In a real world scenario, you will instead be adding real peoples accounts instead of using a script to make new ones). Open ADUC and go to the _EMPLOYEES folderto see all the new accounts added. Pick one of the new accoutns in the eployees folder and copy the username, log out of the VM and log back into client-1 with the username "mydomain.com\(username you picked*)" and the password will be "Password1"
+<p>
+
 
 </p>
 <br />
