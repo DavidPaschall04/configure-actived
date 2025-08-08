@@ -24,7 +24,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 - Setup Domain Controller and Client in Azure
 - Install Active Directory
-- Step 3
+- Create a Domain Admin user within the domain
 - Step 4
 
 <h2>Deployment and Configuration Steps</h2>
@@ -74,4 +74,27 @@ Installing Active Directory: Log into DC 1 and install "Active Directory Domain 
   <img width="1542" height="690" alt="image" src="https://github.com/user-attachments/assets/fa9d2b37-2277-48e2-9e95-87a3995fc0e6" />
 
 </p>
-Next, Click on the flag on the top right of the server manager, and click "Promote this server to a domain controller", Select "Add a new forest", set the name as "mydomain.com", and set your password on the next page. After you set the password, you can navigate through the wizard without changing anything else, once you get to the prerequisites check, you can select install.
+Next, Click on the flag on the top right of the server manager, and click "Promote this server to a domain controller", Select "Add a new forest", set the name as "mydomain.com", and set your password on the next page. After you set the password, you can navigate through the wizard without changing anything else, once you get to the prerequisites check, you can select install. Afer its installed, log out of the VM and log back in with the username "mydomain.com\labuser"
+
+<p>
+<img width="1333" height="964" alt="Screenshot 2025-08-08 104235" src="https://github.com/user-attachments/assets/9cfd4011-f369-4fa2-a2bf-b6ff5fe74576" />
+
+
+</p>
+<p>
+Once logged back into DC-1, open "active directory users and computers" in the windows start menu. In the ADUC window, right click "mydomain.com", select New -> Organizational Unit (OU) and name it "_EMPLOYEES",then create another OU named "_ADMINS". Right click _ADMINS and create a new user with the name "jane Doe", set the username as "jane_admin" and set a password you can remember(ex. Cyberlab123!). Next, locate the new user in "_ADMINS", Right click the user and select properties, select "Member of", and enter the name "domain admins", then click the "Check Names" option, Make sure to click "OK" and "Apply" once you have added the domain admins user. Once you have completed the last step, log out of DC-1 and log back in as "mydomain.com\jane_admin"
+
+
+</p>
+<br />
+
+<p>
+<img width="1123" height="866" alt="Screenshot 2025-08-08 110857" src="https://github.com/user-attachments/assets/18824156-ae93-42e9-a997-a694226aeee2" />
+
+
+</p>
+<p>
+Log in to your Windows 10 VM (client-1), open Settings -> About -> on the right side, Click "Rename this PC" -> under the Computer Name tab, Click Change -> Select member of "Domain" and type in "mydomain.com" and select OK, Set the username to "mydomain.com\jane_admin" and use the same password previously used (Cyberlab123!). Once completed, you will have to restart the VM, after the VM closes, log back into DC-1 VM and go into ADUC -> mydomain.com -> Computers, and make sure client-1 is inside the folder. Inside ADUC, right click mydomain.com and create a new OU, name it "_CLIENTS", go into the computers folder and drag clent-1 into the new folder.
+
+</p>
+<br />
